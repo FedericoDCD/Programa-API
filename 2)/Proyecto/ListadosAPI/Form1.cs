@@ -11,11 +11,11 @@ using System.Net.Http;
 using System.Net;
 using System.IO;
 using Newtonsoft.Json;
+using System.Threading;
 namespace ListadosAPI
 {
     public partial class Form1 : Form
     {
-        bool CanMove=false;
         private String Mode;
         public Form1()
         {
@@ -24,11 +24,17 @@ namespace ListadosAPI
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+            Control.CheckForIllegalCrossThreadCalls = false;//Permito ciertos tipos de llamados de hilo sin la necesidad de error
         }
 
         private void button1_Click(object sender, EventArgs e)
         {//Muestro los Users
+            Thread Trd = new Thread(LoadUsers);
+            LblLoading.Visible = true;
+            PictLoading.Visible = true;
+            Trd.Start();
+        }
+        private void LoadUsers() {
             string sURL;
             sURL = "https://reqres.in/api/users?page=2";
             WebRequest wrGETURL;
@@ -39,15 +45,14 @@ namespace ListadosAPI
             string sLine = "";
             sLine = objReader.ReadToEnd();
             dynamic obj = JsonConvert.DeserializeObject(sLine);
-            UsersDataGrid.DataSource = obj.data;//Utilizo el .data puesto a que los datos están almacenados en éste atributo
+            UsersDataGrid.Invoke(new Action(() => { UsersDataGrid.DataSource = obj.data; }));//Utilizo el .data puesto a que los datos están almacenados en éste atributo y lo invoco para evitar errores de hilos
             Mode = "Users";
-            PictUser.Visible = true;
+            PictLoading.Visible = false;
+            LblLoading.Visible = false;
+            Thread.Sleep(3000);
         }
-
-       
-
-        private void button3_Click(object sender, EventArgs e)
-        {//Muestro el Post
+        private void LoadPost()
+        {
             string sURL;
             sURL = "https://jsonplaceholder.typicode.com/posts";
             WebRequest wrGETURL;
@@ -58,12 +63,23 @@ namespace ListadosAPI
             string sLine = "";
             sLine = objReader.ReadToEnd();
             dynamic obj = JsonConvert.DeserializeObject(sLine);
-            UsersDataGrid.DataSource = obj;//Cargo el DataGridView
+            UsersDataGrid.Invoke(new Action(() => { UsersDataGrid.DataSource = obj; }));//cargo el datagridview y lo invoco para evitar errores de hilos
             Mode = "Post";
             LblNameUser.Visible = false;
             PictUser.Visible = false;
+            PictLoading.Visible = false;
+            LblLoading.Visible = false;
+            Thread.Sleep(3000);
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {//Muestro el Post
+            Thread Trd = new Thread(LoadPost);
+            LblLoading.Visible = true;
+            PictLoading.Visible = true;
+            Trd.Start();
+        }
+      
         private void button2_Click(object sender, EventArgs e)
         {
             Close();
@@ -87,11 +103,14 @@ namespace ListadosAPI
         }
         private void SetImage(String UrlImage) {//Actualizo la imagen
             var request = WebRequest.Create(UrlImage);
-
             using (var response = request.GetResponse())
             using (var stream = response.GetResponseStream())
             {
                 PictUser.Image = Bitmap.FromStream(stream);
+            }
+            if (!PictUser.Visible)
+            {
+                PictUser.Visible = true;
             }
         }
 

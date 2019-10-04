@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.FormOp = new System.Windows.Forms.Panel();
             this.LblTitle = new System.Windows.Forms.Label();
@@ -39,12 +40,15 @@
             this.UsersDataGrid = new Bunifu.Framework.UI.BunifuCustomDataGrid();
             this.PictUser = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.bunifuDragControl1 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
+            this.PictLoading = new System.Windows.Forms.PictureBox();
             this.LblNameUser = new System.Windows.Forms.Label();
+            this.bunifuDragControl1 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
+            this.LblLoading = new System.Windows.Forms.Label();
             this.FormOp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UsersDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictUser)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictLoading)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -114,26 +118,26 @@
             // 
             this.UsersDataGrid.AllowUserToAddRows = false;
             this.UsersDataGrid.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.UsersDataGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.UsersDataGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.UsersDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.UsersDataGrid.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.UsersDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.UsersDataGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(41)))), ((int)(((byte)(42)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(41)))), ((int)(((byte)(42)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.UsersDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(41)))), ((int)(((byte)(42)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(187)))), ((int)(((byte)(196)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.UsersDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.UsersDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.UsersDataGrid.DoubleBuffered = true;
             this.UsersDataGrid.EnableHeadersVisualStyles = false;
             this.UsersDataGrid.GridColor = System.Drawing.SystemColors.Control;
             this.UsersDataGrid.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(41)))), ((int)(((byte)(42)))));
-            this.UsersDataGrid.HeaderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(41)))), ((int)(((byte)(42)))));
+            this.UsersDataGrid.HeaderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(187)))), ((int)(((byte)(196)))));
             this.UsersDataGrid.Location = new System.Drawing.Point(248, 62);
             this.UsersDataGrid.Name = "UsersDataGrid";
             this.UsersDataGrid.ReadOnly = true;
@@ -157,6 +161,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.LblLoading);
+            this.panel2.Controls.Add(this.PictLoading);
             this.panel2.Controls.Add(this.LblNameUser);
             this.panel2.Controls.Add(this.PictUser);
             this.panel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(41)))), ((int)(((byte)(42)))));
@@ -165,12 +171,16 @@
             this.panel2.Size = new System.Drawing.Size(228, 199);
             this.panel2.TabIndex = 7;
             // 
-            // bunifuDragControl1
+            // PictLoading
             // 
-            this.bunifuDragControl1.Fixed = true;
-            this.bunifuDragControl1.Horizontal = true;
-            this.bunifuDragControl1.TargetControl = this.FormOp;
-            this.bunifuDragControl1.Vertical = true;
+            this.PictLoading.Image = ((System.Drawing.Image)(resources.GetObject("PictLoading.Image")));
+            this.PictLoading.Location = new System.Drawing.Point(21, -4);
+            this.PictLoading.Name = "PictLoading";
+            this.PictLoading.Size = new System.Drawing.Size(200, 200);
+            this.PictLoading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.PictLoading.TabIndex = 8;
+            this.PictLoading.TabStop = false;
+            this.PictLoading.Visible = false;
             // 
             // LblNameUser
             // 
@@ -184,6 +194,23 @@
             this.LblNameUser.Text = "Nsdna";
             this.LblNameUser.Visible = false;
             this.LblNameUser.Click += new System.EventHandler(this.LblNameUser_Click);
+            // 
+            // bunifuDragControl1
+            // 
+            this.bunifuDragControl1.Fixed = true;
+            this.bunifuDragControl1.Horizontal = true;
+            this.bunifuDragControl1.TargetControl = this.FormOp;
+            this.bunifuDragControl1.Vertical = true;
+            // 
+            // LblLoading
+            // 
+            this.LblLoading.AutoSize = true;
+            this.LblLoading.Location = new System.Drawing.Point(83, 89);
+            this.LblLoading.Name = "LblLoading";
+            this.LblLoading.Size = new System.Drawing.Size(68, 13);
+            this.LblLoading.TabIndex = 9;
+            this.LblLoading.Text = "CARGANDO";
+            this.LblLoading.Visible = false;
             // 
             // Form1
             // 
@@ -207,6 +234,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PictUser)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictLoading)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -222,6 +250,8 @@
         private System.Windows.Forms.Panel panel2;
         private Bunifu.Framework.UI.BunifuDragControl bunifuDragControl1;
         private System.Windows.Forms.Label LblNameUser;
+        private System.Windows.Forms.PictureBox PictLoading;
+        private System.Windows.Forms.Label LblLoading;
     }
 }
 
